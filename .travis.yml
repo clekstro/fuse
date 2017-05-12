@@ -17,7 +17,9 @@ matrix:
 # Install fuse before installing our code.
 before_install:
   # For linux: install fuse.
-  - sudo apt-get install -qq fuse
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      sudo apt-get install -qq fuse ;
+    fi
 
   # For macOS: update homebrew and then install osxfuse.
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
