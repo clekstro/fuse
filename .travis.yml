@@ -2,15 +2,23 @@
 # Cf. http://docs.travis-ci.com/user/languages/go/
 
 language: go
-
 go: 1.8.1
 
-# Use the virtualized Trusty beta Travis is running in order to get support for
-# installing fuse.
-#
-# Cf. Personal communication from support@travis-ci.com.
-dist: trusty
+matrix:
+  include:
+    - os: linux
+      # Use the virtualized Trusty beta Travis is running in order to get
+      # support for installing fuse.
+      #
+      # Cf. Personal communication from support@travis-ci.com.
+      dist: trusty
+    - os: osx
 
 # Install fuse before installing our code.
 before_install:
+  # For linux: install fuse.
   - sudo apt-get install -qq fuse
+
+  # For macOS: update homebrew and then install osxfuse.
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install osxfuse ; fi
