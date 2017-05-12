@@ -4,14 +4,15 @@
 language: go
 go: 1.8.1
 
-os: linux
-  # Use the virtualized Trusty beta Travis is running in order to get support
-  # for installing fuse.
-  #
-  # Cf. Personal communication from support@travis-ci.com.
-  - dist: trusty
-
-os: osx
+matrix:
+  include:
+  - os: linux:
+    # Use the virtualized Trusty beta Travis is running in order to get support
+    # for installing fuse.
+    #
+    # Cf. Personal communication from support@travis-ci.com.
+    dist: trusty
+  - osx
 
 # Install fuse before installing our code.
 before_install:
