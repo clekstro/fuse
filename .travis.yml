@@ -25,5 +25,5 @@ before_install:
   # For macOS: update homebrew and then install osxfuse.
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       brew update;
-      brew install osxfuse;
+      brew cask install osxfuse;
     fi
